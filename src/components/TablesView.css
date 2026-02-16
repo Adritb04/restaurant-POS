@@ -1,0 +1,187 @@
+/* ====== PLANO TIPO ÁGORA ====== */
+.floor-wrapper {
+  margin-top: 14px;
+}
+
+.zone-tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.zone-tab {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.82);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all 160ms ease;
+}
+
+.zone-tab:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(99,102,241,.30);
+}
+
+.zone-tab.active {
+  background: rgba(99,102,241,.14);
+  border-color: rgba(99,102,241,.35);
+  color: rgba(255,255,255,.95);
+}
+
+.zone-tools {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.85);
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.tool-btn:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(99,102,241,.30);
+}
+
+.tool-btn.active {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.tool-btn-text {
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.floor-canvas {
+  position: relative;
+  height: min(70vh, 720px);
+  border-radius: 20px;
+  background: radial-gradient(ellipse at top, rgba(99,102,241,.08), rgba(0,0,0,.35)),
+              linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border: 1px solid rgba(255,255,255,.10);
+  overflow: hidden;
+  touch-action: none; /* clave para móvil */
+}
+
+/* rejilla */
+.floor-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.floor-canvas.edit::before {
+  opacity: 0.30;
+}
+
+.floor-stage {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* mesas absolutas */
+.floor-table-abs {
+  position: absolute;
+  border-radius: 16px;
+  border: 2px solid rgba(255,255,255,.25);
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: rgba(255,255,255,.95);
+  user-select: none;
+}
+
+.floor-table-abs:hover {
+  filter: brightness(1.06);
+}
+
+.floor-table-abs.reserved {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.floor-table-abs.available,
+.floor-table-abs.occupied {
+  cursor: pointer;
+}
+
+.floor-canvas.edit .floor-table-abs.available,
+.floor-canvas.edit .floor-table-abs.occupied {
+  cursor: grab;
+}
+
+.floor-canvas.edit .floor-table-abs:active {
+  cursor: grabbing;
+}
+
+.floor-table-num {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.floor-table-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+}
+
+/* hint */
+.floor-hint {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.75);
+  font-size: 12px;
+  backdrop-filter: blur(6px);
+}
+
+/* ====== Mobile: que se vea el plano y las mesas ====== */
+@media (max-width: 900px) {
+  .view-container {
+    padding: 18px;
+  }
+
+  .zone-tools .tool-btn-text {
+    display: none;
+  }
+
+  .floor-canvas {
+    height: 64vh;
+    border-radius: 18px;
+  }
+}
